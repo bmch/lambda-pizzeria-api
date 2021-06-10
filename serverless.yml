@@ -1,0 +1,72 @@
+service: rest-api
+
+provider:
+  name: aws
+  runtime: nodejs14.x # set node.js runtime
+  memorySize: 128 # set the maximum memory of the Lambdas in Megabytes
+  timeout: 10 # the timeout is 10 seconds (default is 6 seconds)
+  stage: dev # setting the env stage to dev, this will be visible in the routes
+  region: eu-west-1
+
+functions:
+  createPizza:
+    handler: handler.createPizza
+    events:
+      - http:
+          path: pizza
+          method: post
+          cors: true
+  getAllPizzas:
+    handler: handler.getAllPizzas
+    events:
+      - http:
+          path: pizza
+          method: get
+          cors: true
+  createCart:
+    handler: handler.createCart
+    events:
+      - http:
+          path: cart
+          method: post
+          cors: true
+  addOrderItemToCart:
+    handler: handler.addToCart
+    events:
+      - http:
+          path: cart/{id}/items
+          method: post
+          cors: true
+  checkout:
+    handler: handler.checkout
+    events:
+      - http:
+          path: cart/{id}/checkout
+          method: post
+          cors: true
+  # getCart:
+  #   handler: handler.getCart
+  #   events:
+  #     - http:
+  #         path: cart/{id}
+  #         method: get
+  #         cors: true
+  # updateCart:
+  #   handler: handler.updateCart
+  #   events:
+  #     - http:
+  #         path: cart/{id}/items/{itemId}
+  #         method: put
+  #         cors: true
+
+  ###############################################
+  # getOrders:
+  #   handler: handler.getOrders
+  #   events:
+  #     - http:
+  #         path: orders
+  #         method: get
+  #         cors: true
+
+plugins:
+  - serverless-offline # adding the plugin to be able to run the offline emulation
