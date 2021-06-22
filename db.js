@@ -11,8 +11,9 @@ module.exports = connectToDatabase = () => {
   console.log('=> using new database connection');
   return mongoose
     .connect(process.env.DB, {
-      useNewUrlParser: true,
       useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useFindAndModify: false,
     })
     .then((db) => {
       isConnected = db.connections[0].readyState;

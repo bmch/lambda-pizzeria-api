@@ -10,35 +10,35 @@ provider:
 
 functions:
   createPizza:
-    handler: handler.createPizza
+    handler: lambdas/Pizza/handler.createPizza
     events:
       - http:
           path: pizza
           method: post
           cors: true
   getAllPizzas:
-    handler: handler.getAllPizzas
+    handler: lambdas/Pizza/handler.getAllPizzas
     events:
       - http:
           path: pizza
           method: get
           cors: true
   createCart:
-    handler: handler.createCart
+    handler: lambdas/Cart/handler.createCart
     events:
       - http:
           path: cart
           method: post
           cors: true
   addOrderItemToCart:
-    handler: handler.addToCart
+    handler: lambdas/Cart/handler.addToCart
     events:
       - http:
           path: cart/{id}/items
           method: post
           cors: true
   checkout:
-    handler: handler.checkout
+    handler: lambdas/Cart/handler.checkout
     events:
       - http:
           path: cart/{id}/checkout
